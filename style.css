@@ -1,0 +1,123 @@
+/* ---------- FULL PAGE GLOWING LIGHT PINK BORDER ---------- */
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 30px; /* space inside border */
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Glowing border fixed around the viewport */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none; /* clicks pass through */
+  border: 8px solid #ffc0cb; /* light pink */
+  border-radius: 25px;
+  box-sizing: border-box;
+
+  /* Glow effect */
+  box-shadow: 0 0 20px 5px #ffc0cb;
+}
+
+/* Page container */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Section boxes */
+.section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Product item card */
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f9f9f9;
+  margin-bottom: 15px;
+  transition: 0.2s ease;
+}
+
+.item:hover {
+  transform: scale(1.02);
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+
+/* Product images */
+.item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #ff4d4d;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+
+.btn:active {
+  transform: scale(0.92);
+}
+
+/* Add-to-cart pop animation */
+.btn.add-animate {
+  animation: pop 0.35s ease-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeup 0.5s forwards;
+}
+
+@keyframes fadeup {
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cart styles */
+#cart.has-items {
+  border: none;  /* removed old border completely */
+  padding: 20px;
+  margin-top: 20px;
+}
+
