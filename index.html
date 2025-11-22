@@ -1,11 +1,62 @@
-<!DOCTYPE html>
-<div> ⚠️DISCLAIMER: This is a FAKE order for entertainment purposes only.<br>We may create an ASMR video for you, but no real items will be delivered.<br>No silly orders please!<br>All
+<div> ⚠️DISCLAMER: This is a FAKE order for entertainment purposes only.<br>We may create an ASMR video for you, but no real items will be delivered.<br>No silly orders please!<br>All
   prices are FAKE!⚠️
+<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Squishtopia✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --pink:#ffb6d9;
+      --blue:#4da3ff;
+      --blue-hover:#1c8bff;
+      --bg1:#ffd4e5;
+      --bg2:#d4e3ff;
+    }
+    html,body{height:100%;margin:0;padding:0;}
+    body{
+      font-family:'Fredoka',sans-serif;
+      padding:24px;
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      border:none solid var(--pink);
+      box-sizing:border-box;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    h1{text-align:center;font-size:36px;color:#ff6fa8;margin:6px 0 18px;text-shadow:2px 2px white;}
+    .container{max-width:920px;margin:8px auto 60px;}
+    .item{display:flex;align-items:center;gap:12px;background:#ffffffcc;padding:12px;border-radius:12px;margin-bottom:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06);}
+    .item img{width:72px;height:72px;object-fit:cover;border-radius:12px;border:3px solid #fff;}
+    .title{flex:1;font-weight:700;color:#333;}
+    .controls{display:flex;align-items:center;gap:8px;}
+    input[type="number"]{width:64px;padding:6px;border-radius:8px;border:1px solid #ddd;}
+    .btn{background:var(--blue);color:white;border:3px solid var(--pink);padding:8px 12px;border-radius:12px;font-weight:700;cursor:pointer;}
+    .btn.small{padding:6px 8px;font-size:13px;border-radius:8px}
+    .btn:disabled{opacity:0.5;cursor:not-allowed;}
+    #cart{margin-top:18px;padding:16px;border-top:4px dashed var(--pink);background:rgba(255,255,255,0.6);border-radius:10px;}
+    .cart-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #f2e9f3;}
+    .cart-item img{width:48px;height:48px;border-radius:8px;}
+    .cart-empty{color:#666;padding:8px 0;}
+    /* admin panel */
+    #adminPanel{display:none;margin-top:18px;background:#fff7fb;padding:12px;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,0.06);}
+    #adminPanel input[type="text"], #adminPanel input[type="number"]{padding:6px;border-radius:8px;border:1px solid #ddd}
+    .admin-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
+    /* remove button style */
+    .remove-btn { background: #ff6b6b; color: #fff; border: 0; padding:6px 10px; border-radius:8px; cursor:pointer; }
+    .remove-btn:hover{ opacity:0.95; transform: translateY(-1px); }
+    /* modal */
+    .modal { position:fixed; left:0; top:0; right:0; bottom:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.4); z-index:50; }
+    .modal .box { background:white; padding:16px; border-radius:8px; width:320px; text-align:center; }
+    .small { font-size:13px; color:#666 }
+    .emoji-wrap{position:fixed;left:0;top:0;right:0;bottom:0;pointer-events:none;overflow:hidden;z-index:5;}
+    .floating-emoji{position:absolute;font-size:36px;opacity:.9;transform:translateY(100vh);}
+    pre { background:#fafafa;padding:8px;border-radius:6px;overflow:auto;max-height:160px;}
+      
+    
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Squishtopia✨ (Shop + Admin)</title>
+  <title>Squishtopia✨</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -56,6 +107,7 @@
   </style>
 </head>
 <body>
+ 
   <div class="container">
     <h1>Squishtopia✨</h1>
 
@@ -64,8 +116,21 @@
       <button id="refreshBtn" class="btn" style="background:var(--pink);color:#333">Refresh Data</button>
     </div>
     
+    <!-- WELCOME PAGE -->
+<div id="welcomePage" style="display:flex;height:100vh;align-items:center;justify-content:center;flex-direction:column;text-align:center;font-family:'Fredoka', sans-serif;">
+  <h1>Welcome to Squishtopia! 🎉</h1>
+  <p style="margin-top:10px;color:#555;font-size:16px;">
+    Here you can create fake orders for fun and watch ASMR videos of squishys!
+  </p>
+  <button class="btn" onclick="goToShopFromWelcome()" style="margin-top:20px;font-size:16px;">Enter Shop</button>
+</div>
+
+    
 <!-- SHOP -->
-<div id="shopPage">
+<div id="shopPage" style="display:none;">
+
+  <button class="btn" onclick="scrollToBottom()">Go to Cart</button>
+
 
   <!-- Category Buttons -->
   <div id="categoryButtons" style="margin-bottom:12px;">
@@ -204,6 +269,7 @@
       }
     };
 
+    
     // Seed defaults if products collection empty (first-run)
     (async function seedIfEmpty(){
       const pSnap = await getDocs(collection(db, "products"));
@@ -461,6 +527,13 @@ window.sendToMainDevice = sendToMainDevice;
     }
     window.goToShop = goToShop;
 
+    // welcome page navigation
+function goToShopFromWelcome() {
+  document.getElementById("welcomePage").style.display = "none";
+  document.getElementById("shopPage").style.display = "block";
+}
+window.goToShopFromWelcome = goToShopFromWelcome;
+    
     // load products + stock from Firestore (or fallbacks)
     
     
@@ -468,55 +541,62 @@ window.sendToMainDevice = sendToMainDevice;
 const defaultProducts = [
   // Drinks
   
-  {name:"Water 3$", img:"https://i.postimg.cc/Yq2Q3bYF/waterrr.jpg", max:1, category:"Drinks"},
-  {name:"Ice Pop Prime 3$", img:"https://i.postimg.cc/KzNR3h99/ice-pop-prime.jpg", max:1, category:"Drinks"},
-  {name:"Ice Tea Peach 3$", img:"https://i.postimg.cc/XvgVQc9t/ice-tea-xixo.jpg", max:1, category:"Drinks"},
-  {name:"Fruit Mix Boba 3$", img:"https://i.postimg.cc/N00gC2bb/rainbow-boba.jpg", max:1, category:"Drinks"},
-  {name:"Matcha Boba 3$", img:"https://i.postimg.cc/Qd8sVK2b/match-boba.jpg", max:1, category:"Drinks"},
+  {name:"Water $3", img:"https://i.postimg.cc/Yq2Q3bYF/waterrr.jpg", max:1, category:"Drinks"},
+  {name:"Ice Pop Prime $3", img:"https://i.postimg.cc/KzNR3h99/ice-pop-prime.jpg", max:1, category:"Drinks"},
+  {name:"Ice Tea Peach $3", img:"https://i.postimg.cc/XvgVQc9t/ice-tea-xixo.jpg", max:1, category:"Drinks"},
+  {name:"Fruit Mix Boba $3", img:"https://i.postimg.cc/N00gC2bb/rainbow-boba.jpg", max:1, category:"Drinks"},
+  {name:"Matcha Boba $3", img:"https://i.postimg.cc/Qd8sVK2b/match-boba.jpg", max:1, category:"Drinks"},
 
   // Cookies
-  {name:"Cookies 2$", img:"https://i.postimg.cc/Jz7Jh9yK/cruble-cookieee.jpg", max:2, category:"Cookies"},
-  {name:"Sugar Bliss Cookies 5$", img:"https://i.postimg.cc/y8cLcJsm/cookie-bliss-jar.jpg", max:1, category:"Cookies"},
-  {name:"Crumble Cookie Pack 3$", img:"https://i.postimg.cc/Kzx3cszp/Crumbl-cookies-day.jpg", max:1, category:"Cookies"},
-  {name:"Oreo Pocky 3$", img:"https://i.postimg.cc/mrdTvdvs/pocky-oreo.jpg", max:1, category:"Cookies"},
-  {name:"Strawberry Pocky 3$", img:"https://i.postimg.cc/15zrP4VD/pocky-straw-beery.jpg", max:1, category:"Cookies"},
-  {name:"Jumbo Cookie 8$", img:"https://i.postimg.cc/rmDR85nK/THE-BEST-COOKIE-CAKE-(recipe-link).jpg", max:1, category:"Cookies"},
+     {name:"Chips Ahoy! $3", img:"https://i.postimg.cc/fLj5NyZQ/download-(10).jpg", max:1, category:"Cookies"},
+   {name:"Mega Pop Tart $6", img:"https://i.postimg.cc/k52yBwC9/Pop-Tarts-Frosted-Strawberry-Breakfast-Toaster-Pastries-416g-8-Count-Walmart-com.jpg", max:1, category:"Cookies"},
+  {name:"Cookies $2", img:"https://i.postimg.cc/Jz7Jh9yK/cruble-cookieee.jpg", max:2, category:"Cookies"},
+  {name:"Sugar Bliss Cookies $5", img:"https://i.postimg.cc/y8cLcJsm/cookie-bliss-jar.jpg", max:1, category:"Cookies"},
+  {name:"Crumble Cookie Pack $3", img:"https://i.postimg.cc/Kzx3cszp/Crumbl-cookies-day.jpg", max:1, category:"Cookies"},
+  {name:"Oreo Pocky $3", img:"https://i.postimg.cc/mrdTvdvs/pocky-oreo.jpg", max:1, category:"Cookies"},
+  {name:"Strawberry Pocky $3", img:"https://i.postimg.cc/15zrP4VD/pocky-straw-beery.jpg", max:1, category:"Cookies"},
+  {name:"Jumbo Cookie $8", img:"https://i.postimg.cc/rmDR85nK/THE-BEST-COOKIE-CAKE-(recipe-link).jpg", max:1, category:"Cookies"},
 
   // Chips
-  {name:"Goldfish 2$", 
-img:"https://i.postimg.cc/XXMWVx59/Goldfish-Cheddar-Crackers-6-6oz-Irvine.jpg", max:2, category:"Chips"
+  {name:"Goldfish $2", 
+img:"https://i.postimg.cc/XXMWVx59/Goldfish-Cheddar-Crackers-6-6oz-Irvine.jpg", max:1, category:"Chips"
 },
-  {name:"Blue Heat Takis 4$", img:"https://i.postimg.cc/65p1v6m6/download-(1).jpg", max:1, category:"Chips"},
-  {name:"Fuego Takis 3$", img:"https://i.postimg.cc/tRZsCFXN/fuego-takiisss.jpg", max:1, category:"Chips"},
-  {name:"Hot Corn Doritos 3$", img:"https://i.postimg.cc/63KbgL9n/download-(2).jpg", max:1, category:"Chips"},
-  {name:"BBQ Doritos 3$", img:"https://i.postimg.cc/yN1SGkwp/REVIEW-Doritos-Sweet-Tangy-BBQ.jpg", max:1, category:"Chips"},
-  {name:"Classic Lays Chips 3$", img:"https://i.postimg.cc/8cNc0CXJ/Lay-s-Classic-Potato-Chips-8-oz-Plastic-Bag-Walmart-com.jpg", max:1, category:"Chips"},
-  {name:"Salt and Vinegar Pringles 2$", img:"https://i.postimg.cc/L8LdnV8S/download-(3).jpg", max:1, category:"Chips"},
-  {name:"Classic Mini Ruffles 2$", img:"https://i.postimg.cc/9fkNbRMs/ruffeles-chips.jpg", max:1, category:"Chips"},
-  {name:"Buttered Popcorn 2$", img:"https://i.postimg.cc/3w0ZKL8D/Wise-Artificially-Flavored-Butter-Popcorn-6oz.jpg", max:1, category:"Chips"},
-  {name:"Sunflower Seeds 2$", img:"https://i.postimg.cc/C528Chxz/sunfower.jpg", max:1, category:"Chips"},
-  {name:"Chicken Top Ramen 2$", img:"https://i.postimg.cc/j270HWmv/Nissin-Top-Ramen-Chicken-Flavor-Ramen-Noodle-soup-3oz-Vista.jpg", max:1, category:"Chips"},
+  {name:"Blue Heat Takis $4", img:"https://i.postimg.cc/65p1v6m6/download-(1).jpg", max:1, category:"Chips"},
+  {name:"Fuego Takis $3", img:"https://i.postimg.cc/tRZsCFXN/fuego-takiisss.jpg", max:1, category:"Chips"},
+  {name:"Hot Corn Doritos $3", img:"https://i.postimg.cc/63KbgL9n/download-(2).jpg", max:1, category:"Chips"},
+  {name:"BBQ Doritos $3", img:"https://i.postimg.cc/yN1SGkwp/REVIEW-Doritos-Sweet-Tangy-BBQ.jpg", max:1, category:"Chips"},
+  {name:"Classic Lays Chips $3", img:"https://i.postimg.cc/8cNc0CXJ/Lay-s-Classic-Potato-Chips-8-oz-Plastic-Bag-Walmart-com.jpg", max:1, category:"Chips"},
+  {name:"Salt and Vinegar Pringles $2", img:"https://i.postimg.cc/L8LdnV8S/download-(3).jpg", max:1, category:"Chips"},
+  {name:"Classic Mini Ruffles $2", img:"https://i.postimg.cc/9fkNbRMs/ruffeles-chips.jpg", max:1, category:"Chips"},
+  {name:"Buttered Popcorn $2", img:"https://i.postimg.cc/3w0ZKL8D/Wise-Artificially-Flavored-Butter-Popcorn-6oz.jpg", max:1, category:"Chips"},
+  {name:"Sunflower Seeds $2", img:"https://i.postimg.cc/C528Chxz/sunfower.jpg", max:1, category:"Chips"},
+  {name:"Chicken Top Ramen $2", img:"https://i.postimg.cc/j270HWmv/Nissin-Top-Ramen-Chicken-Flavor-Ramen-Noodle-soup-3oz-Vista.jpg", max:1, category:"Chips"},
 
   // Gummies
-  {name:"Sour-Patch Kids box 4$", img:"https://i.postimg.cc/bNy7BLZq/Sour-Patch-Kids-Theater-Box.jpg", max:1, category:"Gummies"},
-  {name:"Haribo Gummybears 2$", img:"https://i.postimg.cc/bN2Scjv9/haribooo.jpg", max:1, category:"Gummies"},
-  {name:"Airheads 1$", img:"https://i.postimg.cc/JzsLd14s/airhead.jpg", max:2, category:"Gummies"},
-  {name:"Hubba Bubba gum 1$", img:"https://i.postimg.cc/15W7ZZ7H/Hubba-Bubba-5-Piece-Chunky-Original-Bubblegum-20-x-35g.jpg", max:1, category:"Gummies"},
-  {name:"Starburst 2$", img:"https://i.postimg.cc/Jn44NFsg/Starburst-Original-138g.jpg", max:1, category:"Gummies"},
+{name:"Trolli $3", img:"https://i.postimg.cc/gjzskpkZ/download-(9).jpg", max:1, category:"Gummies"},
+  {name:"Sour-Patch Kids box $4", img:"https://i.postimg.cc/bNy7BLZq/Sour-Patch-Kids-Theater-Box.jpg", max:1, category:"Gummies"},
+  {name:"Hubba Bubba Roll $2", img:"https://i.postimg.cc/j5Qvb2Tk/hubba.jpg", max:1, category:"Gummies"},
+    {name:"Warheads Extreme Sour $3", img:"https://i.postimg.cc/9XtY46GV/download-(8).jpg", max:1, category:"Gummies"},
+    {name:"Skittles 2$", img:"https://i.postimg.cc/ry7L4Mhn/skitts.jpg", max:1, category:"Gummies"},
+  {name:"Haribo Gummybears $2", img:"https://i.postimg.cc/bN2Scjv9/haribooo.jpg", max:1, category:"Gummies"},
+  {name:"Airheads $1", img:"https://i.postimg.cc/JzsLd14s/airhead.jpg", max:2, category:"Gummies"},
+  {name:"Hubba Bubba gum $1", img:"https://i.postimg.cc/15W7ZZ7H/Hubba-Bubba-5-Piece-Chunky-Original-Bubblegum-20-x-35g.jpg", max:1, category:"Gummies"},
+  {name:"Starburst $2", img:"https://i.postimg.cc/Jn44NFsg/Starburst-Original-138g.jpg", max:1, category:"Gummies"},
 
   // Fluffy Snacks
-  {name:"Jet Puffed Marshmallows 2$", img:"https://i.postimg.cc/mDQfFgry/How-To-Make-Marshmallow-Snowflakes.jpg", max:1, category:"Fluffy Snacks"},
-  {name:"Marshmallow 1$", img:"https://i.postimg.cc/8Cg0BDFV/download-(4).jpg", max:1, category:"Fluffy Snacks"},
-  {name:"Fluffy Stuff Cotton Candy 2$", img:"https://i.postimg.cc/zvQh0ppg/Charms-Fluffy-Stuff-Cotton-Candy.jpg", max:1, category:"Fluffy Snacks"},
-  {name:"Strawberry Mochi 2$", img:"https://i.postimg.cc/RZ4PfZ3y/Untitled-design.png", max:1, category:"Fluffy Snacks"},
+  {name:"Jet Puffed Marshmallows $2", img:"https://i.postimg.cc/mDQfFgry/How-To-Make-Marshmallow-Snowflakes.jpg", max:1, category:"Fluffy Snacks"},
+  {name:"Marshmallow $1", img:"https://i.postimg.cc/8Cg0BDFV/download-(4).jpg", max:1, category:"Fluffy Snacks"},
+  {name:"Fluffy Stuff Cotton Candy $2", img:"https://i.postimg.cc/zvQh0ppg/Charms-Fluffy-Stuff-Cotton-Candy.jpg", max:1, category:"Fluffy Snacks"},
+  {name:"Strawberry Mochi $2", img:"https://i.postimg.cc/RZ4PfZ3y/Untitled-design.png", max:1, category:"Fluffy Snacks"},
 
   // Chocolates
-  {name:"Nutella 3$", img:"https://i.postimg.cc/qBb9mdTR/Best-Air-Fryers-Recipes-Easy-Air-Fryer-Ideas.jpg", max:1, category:"Chocolates"},
-  {name:"Aero Chocolate Bar 2$", img:"https://i.postimg.cc/7LJ3y0Gq/download-(6).jpg", max:1, category:"Chocolates"},
-  {name:"Milka Chocolate Bar 3$", img:"https://i.postimg.cc/hjg1bhvg/download-(7).jpg", max:1, category:"Chocolates"},
-  {name:"Hershy's Chocolate Bar 2$", img:"https://i.postimg.cc/HnNMKLYL/HERSHEY-S-bar-milk-chocolate-40g.jpg", max:1, category:"Chocolates"},
-  {name:"Willy Wonka Chocolate Bar 2$", img:"https://i.postimg.cc/bJJshjFx/Wonka-Chocolate-Bar-Sticker.jpg", max:2, category:"Chocolates"},
-  {name:"Toblerone 2$", img:"https://i.postimg.cc/G2GhrhxB/Toblerone-bar.jpg", max:1, category:"Chocolates"}
+  {name:"Nutella $3", img:"https://i.postimg.cc/qBb9mdTR/Best-Air-Fryers-Recipes-Easy-Air-Fryer-Ideas.jpg", max:1, category:"Chocolates"},
+  {name:"Dubai Chocolate $2", img:"https://i.postimg.cc/13x7xk1x/Ulker-Cikolata-Kadayifli-Dubai-Lezzeti-93-G-Migros.jpg", max:1, category:"Chocolates"},
+  {name:"Aero Chocolate Bar $2", img:"https://i.postimg.cc/7LJ3y0Gq/download-(6).jpg", max:1, category:"Chocolates"},
+  {name:"Milka Chocolate Bar $3", img:"https://i.postimg.cc/hjg1bhvg/download-(7).jpg", max:1, category:"Chocolates"},
+  {name:"Hershy's Chocolate Bar $2", img:"https://i.postimg.cc/HnNMKLYL/HERSHEY-S-bar-milk-chocolate-40g.jpg", max:1, category:"Chocolates"},
+  {name:"Willy Wonka Chocolate Bar $2", img:"https://i.postimg.cc/bJJshjFx/Wonka-Chocolate-Bar-Sticker.jpg", max:2, category:"Chocolates"},
+  {name:"Toblerone $2", img:"https://i.postimg.cc/G2GhrhxB/Toblerone-bar.jpg", max:1, category:"Chocolates"}
 ];
 
 // === CATEGORY FILTER SCRIPT ===
@@ -571,6 +651,14 @@ renderProducts = function() {
   }).join('');
 };
 
+    function scrollToBottom() {
+  window.scrollTo({ 
+    top: document.body.scrollHeight, 
+    behavior: "smooth" 
+  });
+}
+window.scrollToBottom = scrollToBottom;
+
 
 async function refreshData() {
   try {
@@ -621,3 +709,6 @@ async function refreshData() {
   </script>
  </body>
 </html>
+
+</html>
+
