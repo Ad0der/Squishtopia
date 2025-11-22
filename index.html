@@ -107,10 +107,13 @@
   </style>
 </head>
 <body>
+  
+
+
  
   <div class="container">
     <h1>Squishtopia✨</h1>
-
+    
     <div style="display:none;">
       <button id="openAdminBtn" class="btn">Admin Login</button>
       <button id="refreshBtn" class="btn" style="background:var(--pink);color:#333">Refresh Data</button>
@@ -123,12 +126,19 @@
     Here you can create fake orders for fun and watch ASMR videos of squishys!
   </p>
   <button class="btn" onclick="goToShopFromWelcome()" style="margin-top:20px;font-size:16px;">Enter Shop</button>
+        <!-- HERO IMAGE BLOCK -->
+<div id="heroBlock" style="width:100%; text-align:center;">
+  <img src="https://i.postimg.cc/sgcvtHnm/Gemini-Generated-Image-tvnphltvnphltvnp.png" id="heroImg" style="width:50%; height:auto; object-fit:cover;">
 </div>
+    </div>
+
 
     
 <!-- SHOP -->
 <div id="shopPage" style="display:none;">
 
+  
+  
   <button class="btn" onclick="scrollToBottom()">Go to Cart</button>
 
 
@@ -558,9 +568,10 @@ const defaultProducts = [
   {name:"Jumbo Cookie $8", img:"https://i.postimg.cc/rmDR85nK/THE-BEST-COOKIE-CAKE-(recipe-link).jpg", max:1, category:"Cookies"},
 
   // Chips
+    {name:"Salted Egg Yolk Chips $4 (NEW)", 
+img:"https://i.postimg.cc/GtX3zKk3/Meet-your-new-favorite-snack-Gudetama-Salted-Egg-Yolk-Potato-Chips-bring-rich-savory-flavor-wit.jpg", max:1, category:"Chips"},
   {name:"Goldfish $2", 
-img:"https://i.postimg.cc/XXMWVx59/Goldfish-Cheddar-Crackers-6-6oz-Irvine.jpg", max:1, category:"Chips"
-},
+img:"https://i.postimg.cc/XXMWVx59/Goldfish-Cheddar-Crackers-6-6oz-Irvine.jpg", max:1, category:"Chips"},
   {name:"Blue Heat Takis $4", img:"https://i.postimg.cc/65p1v6m6/download-(1).jpg", max:1, category:"Chips"},
   {name:"Fuego Takis $3", img:"https://i.postimg.cc/tRZsCFXN/fuego-takiisss.jpg", max:1, category:"Chips"},
   {name:"Hot Corn Doritos $3", img:"https://i.postimg.cc/63KbgL9n/download-(2).jpg", max:1, category:"Chips"},
@@ -599,6 +610,8 @@ img:"https://i.postimg.cc/XXMWVx59/Goldfish-Cheddar-Crackers-6-6oz-Irvine.jpg", 
   {name:"Toblerone $2", img:"https://i.postimg.cc/G2GhrhxB/Toblerone-bar.jpg", max:1, category:"Chocolates"}
 ];
 
+    
+    
 // === CATEGORY FILTER SCRIPT ===
 let currentCategory = 'All';
 
@@ -709,6 +722,3 @@ async function refreshData() {
   </script>
  </body>
 </html>
-
-</html>
-
