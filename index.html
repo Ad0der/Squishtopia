@@ -123,7 +123,7 @@
 <div id="welcomePage" style="display:flex;height:100vh;align-items:center;justify-content:center;flex-direction:column;text-align:center;font-family:'Fredoka', sans-serif;">
           <!-- HERO IMAGE BLOCK -->
 <div id="heroBlock" style="width:100%; text-align:center;">
-  <img src="https://i.postimg.cc/sgcvtHnm/Gemini-Generated-Image-tvnphltvnphltvnp.png" id="heroImg" style="width:90%; height:auto; object-fit:cover;">
+  <img src="https://i.postimg.cc/sgcvtHnm/Gemini-Generated-Image-tvnphltvnphltvnp.png" id="heroImg" style="width:80%; height:auto; object-fit:cover;">
 </div>
   <h1>Welcome to Squishtopia! 🎉</h1>
   <p style="margin-top:10px;color:#555;font-size:16px;">
@@ -559,8 +559,9 @@ const defaultProducts = [
   {name:"Matcha Boba $3", img:"https://i.postimg.cc/Qd8sVK2b/match-boba.jpg", max:1, category:"Drinks"},
 
   // Cookies
-     {name:"Chips Ahoy! $3", img:"https://i.postimg.cc/fLj5NyZQ/download-(10).jpg", max:1, category:"Cookies"},
-   {name:"Mega Pop Tart $6", img:"https://i.postimg.cc/k52yBwC9/Pop-Tarts-Frosted-Strawberry-Breakfast-Toaster-Pastries-416g-8-Count-Walmart-com.jpg", max:1, category:"Cookies"},
+     {name:"Mini Blue Raspberry Pop Tart (NEW) $2", img:"https://i.postimg.cc/jSqdKbgn/vodanoj-znak.jpg", max:1, category:"Cookies"},
+  {name:"Chips Ahoy! $3", img:"https://i.postimg.cc/fLj5NyZQ/download-(10).jpg", max:1, category:"Cookies"},
+   {name:"Mega Strawberry Pop Tart $6", img:"https://i.postimg.cc/k52yBwC9/Pop-Tarts-Frosted-Strawberry-Breakfast-Toaster-Pastries-416g-8-Count-Walmart-com.jpg", max:1, category:"Cookies"},
   {name:"Cookies $2", img:"https://i.postimg.cc/Jz7Jh9yK/cruble-cookieee.jpg", max:2, category:"Cookies"},
   {name:"Sugar Bliss Cookies $5", img:"https://i.postimg.cc/y8cLcJsm/cookie-bliss-jar.jpg", max:1, category:"Cookies"},
   {name:"Crumble Cookie Pack $3", img:"https://i.postimg.cc/Kzx3cszp/Crumbl-cookies-day.jpg", max:1, category:"Cookies"},
@@ -569,7 +570,7 @@ const defaultProducts = [
   {name:"Jumbo Cookie $8", img:"https://i.postimg.cc/rmDR85nK/THE-BEST-COOKIE-CAKE-(recipe-link).jpg", max:1, category:"Cookies"},
 
   // Chips
-    {name:"Salted Egg Yolk Chips $4 (NEW)", 
+    {name:"Salted Egg Yolk Chips $4", 
 img:"https://i.postimg.cc/GtX3zKk3/Meet-your-new-favorite-snack-Gudetama-Salted-Egg-Yolk-Potato-Chips-bring-rich-savory-flavor-wit.jpg", max:1, category:"Chips"},
   {name:"Goldfish $2", 
 img:"https://i.postimg.cc/XXMWVx59/Goldfish-Cheddar-Crackers-6-6oz-Irvine.jpg", max:1, category:"Chips"},
@@ -602,14 +603,18 @@ img:"https://i.postimg.cc/XXMWVx59/Goldfish-Cheddar-Crackers-6-6oz-Irvine.jpg", 
   {name:"Strawberry Mochi $2", img:"https://i.postimg.cc/RZ4PfZ3y/Untitled-design.png", max:1, category:"Fluffy Snacks"},
 
   // Chocolates
-  {name:"Reese's $2 (NEW)", img:"https://i.postimg.cc/YqR3RxQF/recces.webp", max:1, category:"Chocolates"},
+  {name:"Reese's Cups $2", img:"https://i.postimg.cc/YqR3RxQF/recces.webp", max:1, category:"Chocolates"},
   {name:"Nutella $3", img:"https://i.postimg.cc/qBb9mdTR/Best-Air-Fryers-Recipes-Easy-Air-Fryer-Ideas.jpg", max:1, category:"Chocolates"},
   {name:"Dubai Chocolate $2", img:"https://i.postimg.cc/13x7xk1x/Ulker-Cikolata-Kadayifli-Dubai-Lezzeti-93-G-Migros.jpg", max:1, category:"Chocolates"},
   {name:"Aero Chocolate Bar $2", img:"https://i.postimg.cc/7LJ3y0Gq/download-(6).jpg", max:1, category:"Chocolates"},
   {name:"Milka Chocolate Bar $3", img:"https://i.postimg.cc/hjg1bhvg/download-(7).jpg", max:1, category:"Chocolates"},
   {name:"Hershy's Chocolate Bar $2", img:"https://i.postimg.cc/HnNMKLYL/HERSHEY-S-bar-milk-chocolate-40g.jpg", max:1, category:"Chocolates"},
   {name:"Willy Wonka Chocolate Bar $2", img:"https://i.postimg.cc/bJJshjFx/Wonka-Chocolate-Bar-Sticker.jpg", max:2, category:"Chocolates"},
-  {name:"Toblerone $2", img:"https://i.postimg.cc/G2GhrhxB/Toblerone-bar.jpg", max:1, category:"Chocolates"}
+  {name:"Toblerone $2", img:"https://i.postimg.cc/G2GhrhxB/Toblerone-bar.jpg", max:1, category:"Chocolates"},
+
+//Ice Creams
+    {name:"Magnum Golden Chocolate Ice Cream $2", img:"https://i.postimg.cc/v8f0w1NY/Magnum-Ice-Cream-Stick-Double-Gold-Caramel-Billionaire-85-ML.jpg", max:1, category:"Ice Creams"},
+  {name:"Outshine Strawberry Pack (NEW) $5", img:"https://i.postimg.cc/Zn69CzdB/download-(11).jpg", max:1, category:"Ice Creams"},
 ];
 
     
@@ -624,7 +629,7 @@ function filterCategory(cat) {
 }
 
 // create category buttons dynamically
-const categories = ['All','Drinks','Cookies','Chips','Gummies','Fluffy Snacks','Chocolates'];
+const categories = ["All","Drinks", "Cookies", "Chips", "Gummies", "Fluffy Snacks", "Chocolates", "Ice Creams"];
 
 // make sure you have <div id="categoryButtons"></div> in your HTML above #items
 const btnContainer = document.getElementById('categoryButtons');
@@ -724,5 +729,6 @@ async function refreshData() {
   </script>
  </body>
 </html>
+
 
 
