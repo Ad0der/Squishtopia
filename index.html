@@ -5,6 +5,18 @@
   <title>Squishtopia✨</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    
+    #scrollBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 5px; /* thickness of the line */
+  background-color: #4da3ff; /* you can change the color */
+  z-index: 9999;
+  transition: width 0.1s ease-out; /* smooth width animation */
+}
+    
     :root{
       --pink:#ffb6d9;
       --blue:#4da3ff;
@@ -105,10 +117,12 @@
     .floating-emoji{position:absolute;font-size:36px;opacity:.9;transform:translateY(100vh);}
     pre { background:#fafafa;padding:8px;border-radius:6px;overflow:auto;max-height:160px;}
   </style>
-  <link rel="icon" type="image/x-icon" href="fafaddad-converted-from-jpg-(1).ico">
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/Ls1V9cfb/fafaddad.jpg">
+
 </head>
 <body>
   
+ <div id="scrollBar"></div>
  
   <div class="container">
     <h1>Squishtopia✨</h1>
@@ -724,12 +738,17 @@ async function refreshData() {
     // expose refresh for debugging
     window.refreshData = refreshData;
 
+      // Select the scroll bar element
+  const scrollBar = document.getElementById('scrollBar');
+
+  // Update the width on scroll
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY; // how much you've scrolled
+    const docHeight = document.body.scrollHeight - window.innerHeight; // total scrollable height
+    const scrollPercent = (scrollTop / docHeight) * 100; // percentage of scroll
+    scrollBar.style.width = scrollPercent + '%';
+  });
+    
   </script>
  </body>
 </html>
-
-
-
-
-
-
